@@ -6,3 +6,4 @@ untagged.txt
 category_errors.txt
 __pycache__
 venv
+.vscode
