@@ -29,8 +29,6 @@ def index():
       word = lowercase_to_word[lowercase_word]
       categories = word_to_categories[word]
 
-      print(categories)
-
       selected_categories = [(category, category_to_prioritised_words[category]) for category in categories]
       categories_and_words = []
 
