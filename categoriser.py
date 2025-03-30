@@ -1,10 +1,8 @@
 import numpy as np
 from collections import defaultdict
 
-categories_per_word = 3
-
 # Categorise all words.
-def categoriser():
+def categoriser(categories_per_word=3):
   words_list, words_vectors           = load_embeddings_file('words.vec')
   categories_list, categories_vectors = load_embeddings_file('categories.vec')
 
@@ -15,22 +13,22 @@ def categoriser():
   # Maps a category to all associated words, ordered in the tuple by priority.
   # categories["some_category"] = ([the most linked words], [the secondmost linked words],
   #                               ... [the n-most linked]).
-  category_to_words = defaultdict(lambda: tuple([] for _ in range(categories_per_word)))
+  category_to_prioritised_words = defaultdict(lambda: tuple([] for _ in range(categories_per_word)))
 
   for word, vector in zip(words_list, words_vectors):
 
     similarities = cosine_similarities(vector, categories_vectors)
     most_similar_idx = np.argsort(similarities)[::-1]
 
-    most_similar_categories = [[categories_list[i]] for i in most_similar_idx[:categories_per_word]]
+    most_similar_categories = [categories_list[i] for i in most_similar_idx[:categories_per_word]]
 
     word_to_categories[word] = most_similar_categories
 
     for i in range(len(most_similar_categories)):
-      curr_category = str(most_similar_categories[i][0])
-      category_to_words[curr_category][i].append(word)
+      curr_category = str(most_similar_categories[i])
+      category_to_prioritised_words[curr_category][i].append(word)
 
-  return word_to_categories, category_to_words
+  return word_to_categories, category_to_prioritised_words
 
 # Function to compute cosine similarity between a vector and a list of word vectors.
 def cosine_similarities(query_vector, vectors):

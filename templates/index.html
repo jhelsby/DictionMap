@@ -22,20 +22,26 @@
             value="{{ request.form.num_words or 20 }}" required>
           <label for="num_cats">Categories:</label>
           <input type="number" id="num_cats" name="num_cats" placeholder="Num Categories" min="1"
-            value="{{ request.form.num_cats or 5 }}" required>
+            value="{{ request.form.num_cats or 3 }}" required>
         </div>
       </form>
     </div>
   </div>
 
   <div class="results">
-    {% if similar_words %}
+    {% if categories_and_words %}
 
     <div class="column">
-      <h2>Similar Words:</h2>
-      <div>
-        {% for word in similar_words %}
-        <span class="word" onclick="submitWord('{{ word }}')">{{ word }}</span>
+      <div class="container">
+        {% for category, words in categories_and_words %}
+        <div class="category">
+          <h3>{{ category }}</h3>
+          <p>
+            {% for word in words %}
+            <span class="word" onclick="submitWord('{{ word }}')">{{ word }}</span>
+            {% endfor %}
+          </p>
+        </div>
         {% endfor %}
       </div>
     </div>
@@ -94,7 +100,7 @@
 
       const inputNumCatsField = document.createElement('input');
       inputNumCatsField.type = 'hidden';
-      inputNumCatsField.name = 'num_words';
+      inputNumCatsField.name = 'num_cats';
       inputNumCatsField.value = inputNumCats;
 
       form.appendChild(inputWord);

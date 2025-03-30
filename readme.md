@@ -18,10 +18,10 @@ Categorise words using fastText word embeddings.
 
 4. After installing requirements, run:
     ```
-    python main
+    python parse_files.py
     ```
 
-    This will extract your words and categories from `crawl-300d-2M.vec`, and assign words to each category. In our example, we are trying to categorise fruit into a collection of colours. The output looks like:
+    This will extract your words and categories from `crawl-300d-2M.vec`, and assign words to each category. In our example, we are trying to categorise fruit into a collection of colours. The internal representation looks like:
 
     ```python
     # Category: ([most-linked items], [secondmost-linked items], [thirdmost-linked items]).
@@ -54,3 +54,10 @@ Categorise words using fastText word embeddings.
     ```
 
     Note the capitalisation in our example for "Apple" and "BlackBerry". This is because DictionMap uses the most common capitalisation (and associated embedding) for each word.
+
+5. Run
+    ```
+    python app.py
+    ```
+
+    This starts a Flask web app which allows you to interact with your categories.
