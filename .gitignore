@@ -1,0 +1,8 @@
+crawl-300d-2M.vec
+words.vec
+categories.vec
+tagged.txt
+untagged.txt
+category_errors.txt
+__pycache__
+venv
