@@ -3,7 +3,7 @@ from categoriser import categoriser
 
 def main():
   parse_files()
-  categoriser()
+  print(categoriser())
 
 if __name__ == "__main__":
   main()
