@@ -2,26 +2,22 @@
 
 {% block content %}
 
-<div class="results">
-  {% if categories_and_words %}
+{% if categories_and_words %}
 
-  <div class="column">
-    <div class="container">
-      {% for category, words in categories_and_words %}
-      <div class="category">
-        <h3 onclick="submitWord('{{ category }}', true)">{{ category }}.</h3>
-        <p>
-          {% for word in words %}
-          <span class="word" onclick="submitWord('{{ word }}', false)">{{ word }}</span>
-          {% endfor %}
-        </p>
-      </div>
+<div class="container">
+  {% for category, words in categories_and_words %}
+  <div class="category">
+    <h3 onclick="submitWord('{{ category }}', true)">{{ category }}.</h3>
+    <p>
+      {% for word in words %}
+      <span class="word" onclick="submitWord('{{ word }}', false)">{{ word }}</span>
       {% endfor %}
-    </div>
+    </p>
   </div>
-
-  {% endif %}
+  {% endfor %}
 </div>
+
+{% endif %}
 
 {% if example_words %}
 <div>
