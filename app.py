@@ -56,8 +56,8 @@ def index():
   categories = [category for category in all_cats]
   words      = [word for word in all_words]
 
-  example_categories = random.sample(list(categories), min(len(categories), 5))
-  example_words      = random.sample(list(words), min(len(words), 15))
+  example_categories = random.sample(list(categories), min(len(categories), 10))
+  example_words      = random.sample(list(words), min(len(words), 20))
 
   return render_template('index.html', example_categories=example_categories, example_words=example_words)
 
