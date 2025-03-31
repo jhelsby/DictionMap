@@ -7,3 +7,4 @@ category_errors.txt
 __pycache__
 venv
 .vscode
+.DS_Store
