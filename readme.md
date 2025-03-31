@@ -2,6 +2,8 @@
 
 Categorise words using fastText word embeddings.
 
+### Run
+
 1. Download `crawl-300d-2M.vec` from fastText [here](https://fasttext.cc/docs/en/english-vectors.html) and place it in root.
 
 2. Create a `categories.txt` file in root and list the categories you want, space-separated. For example:
@@ -61,3 +63,11 @@ Categorise words using fastText word embeddings.
     ```
 
     This starts a Flask web app which allows you to interact with your categories.
+
+### To-Do
+
+* Let you browse categories.
+
+* Manually add categories.
+
+* Randomise which show a bit.

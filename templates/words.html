@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3><a href="/words">Words.</a></h3>
+
+<div class="category">
+  {% for word in words %}
+  <span class="word" onclick="submitWord('{{ word }}', false)">
+    {{ word }}
+  </span>
+  {% endfor %}
+</div>
+
+{% endblock %}
