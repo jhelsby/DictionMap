@@ -64,10 +64,15 @@ Categorise words using fastText word embeddings.
 
     This starts a Flask web app which allows you to interact with your categories.
 
-### To-Do
+6. [Optional.] Any words in `words.txt` which are not in the fastText database cannot be categorised automatically. These get put into a new file, `for_manual_tagging.txt`. Imagine that for some reason, "raspberry" and "coconut" couldn't be categorised automatically. Then `for_manual_tagging.txt` would look like:
+    ```
+    raspberry
+    coconut
+    ```
 
-* Let you browse categories.
-
-* Manually add categories.
-
-* Randomise which show a bit.
+    We can now manually assign them categories by modifying the file as follows:
+    ```
+    raspberry pink red
+    coconut brown white
+    ```
+    The next time we run the app, these will be put into a new file, `manual_tags.txt` where they will be processed by the categoriser.

@@ -5,6 +5,8 @@ from tqdm import tqdm
 words = set()
 categories = set()
 
+manual_tags_file = 'manual_tags.txt'
+
 def parse_files():
   load_wordsets()
   filter_files()
@@ -12,11 +14,48 @@ def parse_files():
 def load_wordsets():
   load_wordfile(words, "./words.txt")
   load_wordfile(categories, "./categories.txt")
+  load_manually_tagged_words()
 
 def load_wordfile(wordset, filename):
-  with open(filename, "r") as file:
-    words = [word.lower() for word in file.read().split()]
+  with open(filename, "r") as f:
+    words = [word.lower() for word in f.read().split()]
     wordset.update(words)
+
+def load_manually_tagged_words():
+  extract_new_tags()
+
+  with open(manual_tags_file, "r") as f:
+    # Stop manually tagged words getting
+    # added to for_manual_tagging.txt again.
+    for line in f:
+      word, _ = line.split(" ", 1)
+      words.remove(word)
+
+# Add any new manually tagged words in their own file.
+def extract_new_tags():
+  file_to_extract_from = "for_manual_tagging.txt"
+
+  with open(file_to_extract_from, "r") as f:
+    lines = f.readlines()
+
+  untagged = []
+  tagged = []
+
+  # Any line with multiple words on it should be interpreted
+  # as "word category1 category2 ... categoryN", i.e. tagged.
+  for line in lines:
+    if len(line.split()) > 1:
+      tagged.append(line)
+    else:
+      untagged.append(line)
+
+  # Keep the untagged words in their old file.
+  with open(file_to_extract_from, "w") as f:
+    f.writelines(untagged)
+
+  # Permanently store the tagged words.
+  with open(manual_tags_file, "a") as f:
+    f.writelines(tagged)
 
 def filter_files():
   filter_crawl()
@@ -48,12 +87,15 @@ def filter_crawl():
 # Run after filter_crawl(), which removes
 # all tagged words from word.
 def get_untagged():
-  with open('untagged.txt', 'w') as file:
+  # Catch any words that aren't in crawl-300d-2M.vec.
+  # These will need to be tagged manually.
+  with open('for_manual_tagging.txt', 'w') as file:
     for word in tqdm(words, total=len(words)):
-      file.write(word + ' ')
+      file.write(word + '\n')
 
-  # Catch any categories that aren't in the crawl.
-  # These will need to be manually assigned words.
+  # Catch any categories that aren't in crawl-300d-2M.vec.
+  # These are probably misspellings and should be
+  # corrected.
   with open('category_errors.txt', 'w') as file:
     for word in tqdm(words, total=len(words)):
       file.write(word + ' ')

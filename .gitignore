@@ -1,8 +1,8 @@
 crawl-300d-2M.vec
 words.vec
 categories.vec
-tagged.txt
-untagged.txt
+for_manual_tagging.txt
+manual_tags.txt
 category_errors.txt
 __pycache__
 venv

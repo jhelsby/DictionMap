@@ -2,8 +2,8 @@
 Flask web application logic for DictionMap.
 """
 from flask import Flask, render_template, request, redirect, url_for
-import os, random, requests, itertools
-from categoriser import categoriser, get_all_words
+import os, random
+from categoriser import categoriser
 from utilities import shuffle_and_combine_prioritised_words
 
 app = Flask(__name__)
