@@ -1,7 +1,7 @@
 import numpy as np
 from collections import defaultdict
 import random
-
+ 
 # Categorise all words.
 def categoriser(categories_per_word=3):
   # Maps each word to its associated categories,
