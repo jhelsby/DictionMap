@@ -75,4 +75,4 @@ Categorise words using fastText word embeddings.
     raspberry pink red
     coconut brown white
     ```
-    The next time we run the app, these will be put into a new file, `manual_tags.txt` where they will be processed by the categoriser.
+    The next time we run `parse_files.py`, these will be put into a new file, `manual_tags.txt` where they will be processed by the categoriser.
